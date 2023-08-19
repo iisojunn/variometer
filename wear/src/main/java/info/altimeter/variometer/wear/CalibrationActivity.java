@@ -27,9 +27,9 @@ public class CalibrationActivity extends WearableActivity {
     VibrationEffect effect;
     SensorManager manager;
     Sensor accelerometer;
-    double[] kA;
-    double[] weights;
-    double[] biases;
+    double[] kA = new double[3];
+    double[] weights = new double[3];
+    double[] biases = new double[3];
     double[] data;
     int calibrationIndex = 0;
     AccelerationListener listener;

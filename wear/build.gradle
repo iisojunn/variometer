@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 33
+    compileSdk 29
 
     defaultConfig {
         applicationId "info.altimeter.variometer.wear"

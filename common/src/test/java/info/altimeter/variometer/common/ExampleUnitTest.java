@@ -1,4 +1,4 @@
-package com.igorinov.variometer.common;
+package info.altimeter.variometer.common;
 
 import org.junit.Test;
 

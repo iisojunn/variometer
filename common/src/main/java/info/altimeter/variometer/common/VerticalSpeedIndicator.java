@@ -214,11 +214,11 @@ public class VerticalSpeedIndicator extends View
 		textMiddle = (metrics.ascent + metrics.descent) / 2;
 
 		int step = 1;
-        int subdivs = 10;
-        if (scaleLimit > 6) {
-            step = 1;
-            subdivs = 5;
-        }
+		int subdivs = 10;
+		if (scaleLimit > 6) {
+			step = 1;
+			subdivs = 5;
+		}
 		if (scaleLimit > 8) {
 			step = 2;
 			subdivs = 10;

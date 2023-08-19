@@ -168,7 +168,7 @@ public class FixedLagSmoother extends KalmanFilter {
 
         for (i = 0; i < N; i += 1) {
             for (j = 0; j < stateDim; j += 1)
-            X.set(i, j, src[j]);
+                X.set(i, j, src[j]);
         }
         count = 0;
 

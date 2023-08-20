@@ -42,7 +42,8 @@ public class VerticalSpeedIndicator extends View
 	float unitR = 1f;
 	int scaleLimit = 5;
 	float scaleLimitR = 1f / scaleLimit;
-	float vspeed = Float.NaN;
+	float vspeed = 0f;
+	float drawnvspeed = 0f;
 	String typeName = "";
 	String unitName = "m/s";
 
@@ -233,10 +234,10 @@ public class VerticalSpeedIndicator extends View
         if (scaleLimit > 36) {
             step = 10;
         }
-        if (scaleLimit > 72) {
+		if (scaleLimit > 72) {
             step = 20;
         }
-
+		
 		paint.setColor(Color.WHITE);
 		for (i = 0; i <= scaleLimit - 1; i += step) {
 			tx = cx - 100 * (float) Math.cos((double) i * Math.PI * scaleLimitR);
@@ -387,6 +388,10 @@ public class VerticalSpeedIndicator extends View
 	
 	public void setVSpeed(float speed) {
 		vspeed = speed;
-		// postInvalidate();
+		// Draw again only if speed difference matters
+		if (Math.abs(vspeed - drawnvspeed) > 0.05f) {
+			postInvalidate();
+			drawnvspeed = vspeed;
+		}
 	}
 }

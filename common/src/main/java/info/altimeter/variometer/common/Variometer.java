@@ -10,10 +10,13 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Process;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
 public class Variometer {
+
+    private static final String TAG = "Variometer";
     VariometerListener listener;
     boolean inertial;
     AtmosphereModel atmosphere;
@@ -469,6 +472,7 @@ public class Variometer {
 
         gamma = gamma_a * (1 + p * sin_sq) / Math.sqrt(1 - e_sq * sin_sq);
 
+        Log.v(TAG, String.format("Local gravity: %s", gamma));
         return gamma;
     }
 

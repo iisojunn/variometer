@@ -12,15 +12,20 @@ import android.os.Message;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import androidx.preference.PreferenceManager;
+
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 import info.altimeter.variometer.common.Variometer;
 
 public class CalibrationActivity extends Activity {
 
+    private static final String TAG = "CalibrationActivity";
     private SharedPreferences pref;
     private TextView textStep;
     private TextView textNext;
@@ -82,10 +87,19 @@ public class CalibrationActivity extends Activity {
     }
 
     private void optimize() {
+        Log.v(TAG, String.format("Data: %s", Arrays.toString(data)));
         double latitude = pref.getFloat("latitude", 45);
         double g = Variometer.localGravity(latitude);
         boolean calibrated = true;
+
+        Log.v(TAG, String.format("Before kA: %s", Arrays.toString(kA)));
+        Log.v(TAG, String.format("Before weights: %s", Arrays.toString(weights)));
+        Log.v(TAG, String.format("Before biases: %s", Arrays.toString(biases)));
         Variometer.biasUpdate(weights, biases, data, calibrationIndex * 3, g);
+        Log.v(TAG, String.format("After kA: %s", Arrays.toString(kA)));
+        Log.v(TAG, String.format("After weights: %s", Arrays.toString(weights)));
+        Log.v(TAG, String.format("After biases: %s", Arrays.toString(biases)));
+
         SharedPreferences.Editor editor = pref.edit();
         if (Double.isNaN(biases[0]) || Double.isNaN(biases[1]) || Double.isNaN(biases[2]))
             calibrated = false;

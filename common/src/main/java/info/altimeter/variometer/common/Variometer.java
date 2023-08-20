@@ -98,7 +98,6 @@ public class Variometer {
         listenerA = new AccelerationListener();
         listenerP = new PressureListener();
 
-        mSensorThread = new HandlerThread("Variometer Sensors", Process.THREAD_PRIORITY_MORE_FAVORABLE);
     }
 
     public interface VariometerListener {
@@ -409,6 +408,7 @@ public class Variometer {
             filter.initCovariance(p_init);
         }
 
+        mSensorThread = new HandlerThread("Variometer Sensors", Process.THREAD_PRIORITY_MORE_FAVORABLE);
         mSensorThread.start();
         mSensorHandler = new Handler(mSensorThread.getLooper());
 

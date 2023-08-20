@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     int smoother_lag = 5;
     boolean keep_on = true;
 
-    boolean soundEnabled = false;
+    boolean soundEnabled = true;
     boolean soundDecay = true;
     float soundStartH = +0.3f;
     float soundStopH = +0.2f;

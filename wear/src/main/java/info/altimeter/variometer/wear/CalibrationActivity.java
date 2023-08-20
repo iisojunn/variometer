@@ -60,11 +60,11 @@ public class CalibrationActivity extends Activity {
         }
 
         public void onSensorChanged(SensorEvent event) {
-            if (calibrationIndex >= MAX_POINTS)
+            if (calibrationIndex == 0)
                 return;
 
             for (int k = 0; k < 3; k += 1 ) {
-                data[calibrationIndex * 3 + k] = event.values[k];
+                data[(calibrationIndex - 1) * 3 + k] = event.values[k];
             }
         }
     }
@@ -75,11 +75,11 @@ public class CalibrationActivity extends Activity {
             Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             vibrator.vibrate(effect);
             if (calibrationIndex >= MAX_POINTS) {
+                manager.unregisterListener(listener);
                 optimize();
                 return;
             }
             calibrationIndex += 1;
-            // textView.setText(String.format(Locale.US, "%d", calibrationIndex));
             textStep.setText(getString(string_ids[calibrationIndex]));
         }
     }

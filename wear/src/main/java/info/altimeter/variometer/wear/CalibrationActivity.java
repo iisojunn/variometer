@@ -1,5 +1,6 @@
 package info.altimeter.variometer.wear;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -11,14 +12,14 @@ import android.os.Message;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import androidx.preference.PreferenceManager;
-import android.support.wearable.activity.WearableActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import info.altimeter.variometer.common.Variometer;
 
-public class CalibrationActivity extends WearableActivity {
+public class CalibrationActivity extends Activity {
 
     private SharedPreferences pref;
     private TextView textStep;
@@ -135,6 +136,7 @@ public class CalibrationActivity extends WearableActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibration);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         effect = VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE);
 
@@ -146,9 +148,6 @@ public class CalibrationActivity extends WearableActivity {
         textStep = findViewById(R.id.text_step);
 
         textNext = findViewById(R.id.text_next);
-
-        // Enables Always-on
-        setAmbientEnabled();
 
         manager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);

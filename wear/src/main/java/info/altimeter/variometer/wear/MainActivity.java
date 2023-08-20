@@ -1,20 +1,21 @@
 package info.altimeter.variometer.wear;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.wearable.activity.WearableActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import androidx.preference.PreferenceManager;
 
 import info.altimeter.variometer.common.Variometer;
 import info.altimeter.variometer.common.VerticalSpeedIndicator;
 
-public class MainActivity extends WearableActivity {
+public class MainActivity extends Activity {
 
     private SharedPreferences pref;
     private Variometer variometer;
@@ -110,13 +111,11 @@ public class MainActivity extends WearableActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         variometer = new Variometer(true, 25);
         vsiView = findViewById(R.id.vsi);
-
-        // Enables Always-on
-        setAmbientEnabled();
 
         variometer.setListener(new SpeedListener());
     }

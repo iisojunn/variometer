@@ -118,13 +118,13 @@ public class CalibrationActivity extends WearableActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
-        Intent intent;
 
         if (event.getRepeatCount() == 0) {
             switch (keyCode) {
                 case KeyEvent.KEYCODE_STEM_1:
                 case KeyEvent.KEYCODE_STEM_2:
                 case KeyEvent.KEYCODE_STEM_3:
+                case KeyEvent.KEYCODE_BACK:
                     buttonClicked();
                     return true;
             }

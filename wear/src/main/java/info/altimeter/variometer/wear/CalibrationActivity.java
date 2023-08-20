@@ -1,6 +1,5 @@
 package info.altimeter.variometer.wear;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;

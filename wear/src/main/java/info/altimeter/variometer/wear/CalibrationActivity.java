@@ -59,14 +59,12 @@ public class CalibrationActivity extends Activity {
         public void onAccuracyChanged(Sensor arg0, int arg1) {
         }
 
-        public void onSensorChanged(SensorEvent arg0) {
+        public void onSensorChanged(SensorEvent event) {
             if (calibrationIndex >= MAX_POINTS)
                 return;
 
-            int k;
-
-            for (k = 0; k < 3; k += 1 ) {
-                data[calibrationIndex * 3 + k] = arg0.values[k];
+            for (int k = 0; k < 3; k += 1 ) {
+                data[calibrationIndex * 3 + k] = event.values[k];
             }
         }
     }
@@ -126,7 +124,6 @@ public class CalibrationActivity extends Activity {
     }
 
     private void buttonClicked() {
-        manager.registerListener(listener, accelerometer, 50000);
         handler.sendEmptyMessageDelayed(73, 1000);
     }
 
@@ -163,9 +160,6 @@ public class CalibrationActivity extends Activity {
 
         textNext = findViewById(R.id.text_next);
 
-        manager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        accelerometer = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
         kA[0] = 0;
         kA[1] = 0;
         kA[2] = 0;
@@ -176,6 +170,9 @@ public class CalibrationActivity extends Activity {
         biases[1] = 0;
         biases[2] = 0;
         data = new double[MAX_POINTS * 3];
-        //handler.sendEmptyMessageDelayed(73, 1000);
+
+        manager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        accelerometer = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        manager.registerListener(listener, accelerometer, 50000);
     }
 }

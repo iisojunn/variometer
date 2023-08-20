@@ -35,7 +35,7 @@ public class SoundSettingsActivity extends SettingsActivity {
         initEditFloat(R.id.sound_stop_h, PREF_SOUND_STOP_H, +0.1875f);
         initEditFloat(R.id.sound_stop_l, PREF_SOUND_STOP_L, -0.1875f);
         initEditFloat(R.id.sound_start_l, PREF_SOUND_START_L, -0.25f);
-        initCompoundButton(R.id.enable_sound, PREF_SOUND_ENABLE, false);
+        initCompoundButton(R.id.enable_sound, PREF_SOUND_ENABLE, true);
         initCompoundButton(R.id.sound_decay, PREF_SOUND_DECAY, true);
     }
 }

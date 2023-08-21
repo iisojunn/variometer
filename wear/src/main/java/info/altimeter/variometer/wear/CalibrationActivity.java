@@ -72,10 +72,10 @@ public class CalibrationActivity extends Activity {
     public class InternalMessageHandler extends Handler {
         @Override
         public void dispatchMessage(Message msg) {
+            manager.unregisterListener(listener);
             Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             vibrator.vibrate(effect);
             if (calibrationIndex >= MAX_POINTS) {
-                manager.unregisterListener(listener);
                 optimize();
                 return;
             }
@@ -124,6 +124,7 @@ public class CalibrationActivity extends Activity {
     }
 
     private void buttonClicked() {
+        manager.registerListener(listener, accelerometer, 50000);
         handler.sendEmptyMessageDelayed(73, 1000);
     }
 
@@ -173,6 +174,5 @@ public class CalibrationActivity extends Activity {
 
         manager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        manager.registerListener(listener, accelerometer, 50000);
     }
 }

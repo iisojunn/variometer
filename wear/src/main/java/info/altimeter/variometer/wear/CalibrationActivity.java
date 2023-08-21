@@ -32,7 +32,6 @@ public class CalibrationActivity extends Activity {
     VibrationEffect effect;
     SensorManager manager;
     Sensor accelerometer;
-    double[] kA = new double[3];
     double[] weights = new double[3];
     double[] biases = new double[3];
     double[] data;
@@ -90,20 +89,15 @@ public class CalibrationActivity extends Activity {
         double g = Variometer.localGravity(latitude);
         boolean calibrated = true;
 
-        Log.v(TAG, String.format("Before kA: %s", Arrays.toString(kA)));
         Log.v(TAG, String.format("Before weights: %s", Arrays.toString(weights)));
         Log.v(TAG, String.format("Before biases: %s", Arrays.toString(biases)));
         Variometer.biasUpdate(weights, biases, data, calibrationIndex * 3, g);
-        Log.v(TAG, String.format("After kA: %s", Arrays.toString(kA)));
         Log.v(TAG, String.format("After weights: %s", Arrays.toString(weights)));
         Log.v(TAG, String.format("After biases: %s", Arrays.toString(biases)));
 
         SharedPreferences.Editor editor = pref.edit();
         if (Double.isNaN(biases[0]) || Double.isNaN(biases[1]) || Double.isNaN(biases[2]))
             calibrated = false;
-        editor.putFloat("k_a_x", (float) kA[0]);
-        editor.putFloat("k_a_y", (float) kA[1]);
-        editor.putFloat("k_a_z", (float) kA[2]);
         editor.putFloat("k_b_x", (float) (weights[0] - 1.0));
         editor.putFloat("k_b_y", (float) (weights[1] - 1.0));
         editor.putFloat("k_b_z", (float) (weights[2] - 1.0));
@@ -161,9 +155,6 @@ public class CalibrationActivity extends Activity {
 
         textNext = findViewById(R.id.text_next);
 
-        kA[0] = 0;
-        kA[1] = 0;
-        kA[2] = 0;
         weights[0] = 1;
         weights[1] = 1;
         weights[2] = 1;

@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     double sigma_a = 0.05;
     double sigma_vsi = 0.0625;
     double sigma_ivsi = 0.0039;
-    double latitude = 45.0;
+    double latitude = 65.0;
     float altitude = 0;
     float vspeed = 0;
     int t = 0;

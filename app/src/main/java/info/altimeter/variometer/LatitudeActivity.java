@@ -50,7 +50,7 @@ public class LatitudeActivity extends AppCompatActivity {
 
         pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        float fLatitude = pref.getFloat(FilterParametersActivity.PREF_LATITUDE, 45);
+        float fLatitude = pref.getFloat(FilterParametersActivity.PREF_LATITUDE, 65);
         editLatitude.setText(Float.toString(fLatitude));
 
         buttonEnter.setOnClickListener(new EnterClickListener());

@@ -85,7 +85,7 @@ public class CalibrationActivity extends Activity {
 
     private void optimize() {
         Log.v(TAG, String.format("Data: %s", Arrays.toString(data)));
-        double latitude = pref.getFloat("latitude", 45);
+        double latitude = pref.getFloat("latitude", 65);
         double g = Variometer.localGravity(latitude);
         boolean calibrated = true;
 

@@ -90,7 +90,7 @@ public class CalibrationActivity extends AppCompatActivity {
     private class OptimizationThread extends Thread {
         @Override
         public void run() {
-            double latitude = pref.getFloat(FilterParametersActivity.PREF_LATITUDE, 45);
+            double latitude = pref.getFloat(FilterParametersActivity.PREF_LATITUDE, 65);
             double g = Variometer.localGravity(latitude);
             kB[0] = 1;
             kB[1] = 1;

@@ -32,7 +32,7 @@ public class FilterParametersActivity extends SettingsActivity {
         initEditFloat(R.id.sigma2, PREF_SIGMA_2, 0);
         initEditFloat(R.id.sigma_p, PREF_SIGMA_P, 0.05f);
         initEditFloat(R.id.sigma_a, PREF_SIGMA_A, 0.05f);
-        initEditFloat(R.id.latitude, PREF_LATITUDE, 45);
+        initEditFloat(R.id.latitude, PREF_LATITUDE, 65);
         initEditFloat(R.id.weight_x, PREF_WEIGHT_X, 0);
         initEditFloat(R.id.weight_y, PREF_WEIGHT_Y, 0);
         initEditFloat(R.id.weight_z, PREF_WEIGHT_Z, 0);

@@ -51,7 +51,7 @@ public class Variometer {
     int rotationSamplePeriod_us;
 
     // Default accelerometer noise density
-    double accelerometerNoiseDensity = 0.01;
+    double accelerometerNoiseDensity = 0.05;
     double filterPeriod = 1e-3;
 
     double[] input = new double[2];
@@ -299,8 +299,14 @@ public class Variometer {
             HamiltonProduct(v, acc);
             HamiltonProduct(v, q1);
 
+            double verticalAcceleration = 0;
+
             if (arg0.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-                input[1] = (v[2] - gravity);
+                verticalAcceleration = (v[2] - gravity);
+                if (Math.abs(verticalAcceleration) < 0.5) {
+                    verticalAcceleration = 0;
+                }
+                input[1] = verticalAcceleration;
             }
 
             if (arg0.sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION) {

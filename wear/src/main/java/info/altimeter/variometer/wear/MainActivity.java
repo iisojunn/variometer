@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
 
         pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         overrideCalibration();
-        variometer = new Variometer(true, 25);
+        variometer = new Variometer(true, 10);
         vsiView = findViewById(R.id.vsi);
 
         variometer.setListener(new SpeedListener());

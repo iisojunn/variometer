@@ -68,7 +68,7 @@ public class Variometer {
     double sigma_h = 1.0;
     double sigma_a = 0.05;
     double sigma_vsi = 0.0625;
-    double sigma_ivsi = 0.1;
+    double sigma_ivsi = 0.5;
     double gravity = SensorManager.STANDARD_GRAVITY;
 
     /*  Values for initial state uncertainty, with

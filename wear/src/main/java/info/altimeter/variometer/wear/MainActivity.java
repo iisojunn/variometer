@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +18,7 @@ import info.altimeter.variometer.common.VerticalSpeedIndicator;
 
 public class MainActivity extends Activity {
 
+    private final static String TAG = "MainActivity";
     private SharedPreferences pref;
     private Variometer variometer;
     private VerticalSpeedIndicator vsiView;
@@ -114,6 +116,7 @@ public class MainActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        overrideCalibration();
         variometer = new Variometer(true, 25);
         vsiView = findViewById(R.id.vsi);
 
@@ -136,6 +139,19 @@ public class MainActivity extends Activity {
         }
         variometer.setAccelerometerCorrection(kB, kC);
         variometer.start(this);
+    }
+
+    void overrideCalibration() {
+        Log.d(TAG, "Overriding calibration");
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putFloat("k_b_x", (float) (1.0015595843584697 - 1.0));
+        editor.putFloat("k_b_y", (float) (0.9991079216209161 - 1.0));
+        editor.putFloat("k_b_z", (float) (0.9902745334796245 - 1.0));
+        editor.putFloat("k_c_x", (float) -0.056);
+        editor.putFloat("k_c_y", (float) 0.08);
+        editor.putFloat("k_c_z", (float) 0.36);
+        editor.putBoolean("calibrated", true);
+        editor.apply();
     }
 
     @Override

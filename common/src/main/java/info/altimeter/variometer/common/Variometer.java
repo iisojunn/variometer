@@ -50,10 +50,8 @@ public class Variometer {
     double rotationSamplingPeriod;
     int rotationSamplePeriod_us;
 
-    // Default accelerometer noise density is 300 µg/√Hz
-    double accelerometerNoiseDensity = 0.002942;
-    // Pressure sensor noise in hPa
-    double pressureSensorNoise = 5;
+    // Default accelerometer noise density
+    double accelerometerNoiseDensity = 0.01;
     double filterPeriod = 1e-3;
 
     double[] input = new double[2];
@@ -388,7 +386,9 @@ public class Variometer {
             filter.setProcessNoise(filterPeriod, sigma_ivsi * sigma_ivsi);
 
             sigma_a = accelerometerNoiseDensity / Math.sqrt(accelerationSamplingPeriod * 2);
+            Log.v(TAG, String.format("Sigma_a: %s", sigma_a));
             sigma_h = atmosphere.getStdH(0, sigma_p);
+            Log.v(TAG, String.format("Sigma_h: %s", sigma_h));
             double[] r = { sigma_h, sigma_a };
             filter.setMeasurementError(r);
             filter.initCovariance(p_init);
